@@ -40,7 +40,7 @@ function renderProducts(data) {
                       `Hello, I am interested in ${p.name}`
                     )}">
                     <i class="fab fa-whatsapp"></i>
-                    WhatsApp Inquiry
+                    WhatsApp
                 </a>
 
             </div>
