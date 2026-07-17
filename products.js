@@ -2,7 +2,7 @@ const products = [
   {
     id: 1,
     name: "Buddha Statue",
-    price: 15000,
+    price: 50000,
     category: "Statue",
     image: "./images/105571678_120865533013577_9208778171644514231_n.jpg"
   },
@@ -37,7 +37,7 @@ const products = [
   {
     id: 6,
     name: "ganesh",
-    price: 25000,
+    price: 35000,
     category: "Statue",
     image: "./images/482004647_1411977363300592_2482389154394514824_n.jpg"
   }
