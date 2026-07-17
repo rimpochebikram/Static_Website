@@ -22,8 +22,8 @@ const products = [
   },
   {
     id: 4,
-    name: "Tara",
-    price: 15000,
+    name: "Guru",
+    price: 35000,
     category: "Statue",
     image: "./images/178412145_292085455891583_8629124554886026963_n.jpg"
   },
@@ -36,10 +36,53 @@ const products = [
   },
   {
     id: 6,
-    name: "ganesh",
+    name: "Ganesh",
     price: 35000,
     category: "Statue",
     image: "./images/482004647_1411977363300592_2482389154394514824_n.jpg"
+  },
+  {
+    id: 7,
+    name: "Bajrapani",
+    price: 50000,
+    category: "Statue",
+    image: "./images/product_image-18-bajrapani-(2)-0315.png"
+  },
+  {
+    id: 8,
+    name: "Namkhel",
+    price: 50000,
+    category: "Statue",
+    image: "./images/product_image-12-namkhel-(2)-0648.png"
+  },
+  {
+    id: 9,
+    name: "Buddha",
+    price: 20000,
+    category: "Statue",
+    image: "./images/product_image-_mg_9487-8206.png"
+  },
+  {
+    id: 10,
+    name: "Bajrapani",
+    price: 30000,
+    category: "Statue",
+    image: "./images/product_image-img_20210108_172050-8160.png"
+  },
+   {
+    id: 11,
+    name: "Guru",
+    price: 35000,
+    category: "Statue",
+    image: "./images/product_image-_mg_9503-7036.png"
+  },
+  {
+    id: 12,
+    name: "Ganesh",
+    price: 35000,
+    category: "Statue",
+    image: "./images/product_image-_mg_9443-6049.png"
   }
+  
 
 ];
