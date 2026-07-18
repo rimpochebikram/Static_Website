@@ -2,14 +2,14 @@ const products = [
   {
     id: 1,
     name: "Buddha Statue",
-    price: 50000,
+    price: 150000,
     category: "Statue",
     image: "./images/105571678_120865533013577_9208778171644514231_n.jpg"
   },
   {
     id: 2,
     name: "Singashan Kuber",
-    price: 50000,
+    price: 110000,
     category: "Statue",
     image: "./images/105859551_111979657235498_3989117061123004382_n.jpg"
   },
@@ -30,28 +30,28 @@ const products = [
    {
     id: 5,
     name: "Guru",
-    price: 35000,
+    price: 120000,
     category: "Statue",
     image: "./images/295065473_735835980914737_7553790886912316297_n.jpg"
   },
   {
     id: 6,
     name: "Ganesh",
-    price: 35000,
+    price: 45000,
     category: "Statue",
     image: "./images/482004647_1411977363300592_2482389154394514824_n.jpg"
   },
   {
     id: 7,
     name: "Bajrapani",
-    price: 50000,
+    price: 75000,
     category: "Statue",
     image: "./images/product_image-18-bajrapani-(2)-0315.png"
   },
   {
     id: 8,
     name: "Namkhel",
-    price: 50000,
+    price: 60000,
     category: "Statue",
     image: "./images/product_image-12-namkhel-(2)-0648.png"
   },
@@ -65,7 +65,7 @@ const products = [
   {
     id: 10,
     name: "Bajrapani",
-    price: 30000,
+    price: 40000,
     category: "Statue",
     image: "./images/product_image-img_20210108_172050-8160.png"
   },
@@ -79,7 +79,7 @@ const products = [
   {
     id: 12,
     name: "Ganesh",
-    price: 35000,
+    price: 70000,
     category: "Statue",
     image: "./images/product_image-_mg_9443-6049.png"
   }
