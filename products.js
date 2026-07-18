@@ -16,7 +16,7 @@ const products = [
   {
     id: 3,
     name: "Aparamita",
-    price: 30000,
+    price: ,
     category: "Statue",
     image: "./images/106923655_123060389460758_5433697895689076579_n.jpg"
   },
