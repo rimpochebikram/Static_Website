@@ -13,13 +13,7 @@ const products = [
     category: "Statue",
     image: "./images/105859551_111979657235498_3989117061123004382_n.jpg"
   },
-  {
-    id: 3,
-    name: "Aparamita",
-    price: 0, // Change this to the actual price later
-    category: "Statue",
-    image: "./images/106923655_123060389460758_5433697895689076579_n.jpg"
-  },
+  
   {
     id: 4,
     name: "Guru",
