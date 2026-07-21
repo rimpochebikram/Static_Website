@@ -16,7 +16,7 @@ const products = [
   {
     id: 3,
     name: "Aparamita",
-    price: ,
+    price: 0, // Change this to the actual price later
     category: "Statue",
     image: "./images/106923655_123060389460758_5433697895689076579_n.jpg"
   },
@@ -27,7 +27,7 @@ const products = [
     category: "Statue",
     image: "./images/178412145_292085455891583_8629124554886026963_n.jpg"
   },
-   {
+  {
     id: 5,
     name: "Guru",
     price: 120000,
@@ -69,7 +69,7 @@ const products = [
     category: "Statue",
     image: "./images/product_image-img_20210108_172050-8160.png"
   },
-   {
+  {
     id: 11,
     name: "Guru",
     price: 35000,
@@ -83,6 +83,4 @@ const products = [
     category: "Statue",
     image: "./images/product_image-_mg_9443-6049.png"
   }
-  
-
 ];
