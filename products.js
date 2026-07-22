@@ -86,5 +86,69 @@ const products = [
     category: "Statue",
     image: "./images/product_image-_mg_9443-6049.png",
     description: "Premium Ganesh statue featuring exquisite handmade details."
+  },
+   {
+    id: 13,
+    name: "Amitabha Buddha",
+    price: 70000,
+    category: "Statue",
+    image: "./images/fa7a375f-0fc6-478b-ae95-bca8fd8d7369.png",
+    description: "34 cm Amitabha Buddha statue made with high-quality materials, perfect for meditation spaces."
+  },
+  {
+    id: 14,
+    name: "Bajrapani",
+    price: 17000,
+    category: "Statue",
+    image: "./images/ChatGPT Image Jul 22, 2026, 09_23_55 PM.png",
+    description: "22 cm Premium Bajrapani statue featuring exquisite handmade details."
+  },
+  {
+    id: 15,
+    name: "Guru Rimpoche",
+    price: 30000,
+    category: "Statue",
+    image: "./images/ChatGPT Image Jul 22, 2026, 09_31_08 PM.png",
+    description: "34 cm Premium Guru Rimpoche statue featuring exquisite handmade details."
+  },
+  {
+    id: 16,
+    name: "Tara",
+    price: 30000,
+    category: "Statue",
+    image: "./images/ChatGPT Image Jul 22, 2026, 09_33_58 PM.png",
+    description: "34 cm Premium Tara statue featuring exquisite handmade details."
+  },
+   {
+    id: 17,
+    name: "Manjushree",
+    price: 15000,
+    category: "Statue",
+    image: "./images/ChatGPT Image Jul 22, 2026, 09_36_29 PM.png",
+    description: "32 cm Premium Manjushree statue featuring exquisite handmade details."
+  },
+   {
+    id: 18,
+    name: "Tara",
+    price: 15000,
+    category: "Statue",
+    image: "./images/ChatGPT Image Jul 22, 2026, 09_39_21 PM.png",
+    description: "32 cm Premium Tara statue featuring exquisite handmade details."
+  },
+    {
+    id: 19,
+    name: "Guru",
+    price: 15000,
+    category: "Statue",
+    image: "./images/ChatGPT Image Jul 22, 2026, 09_44_51 PM.png",
+    description: "32 cm Premium Guru statue featuring exquisite handmade details."
+  },
+   {
+    id: 20,
+    name: "Buddha",
+    price: 15000,
+    category: "Statue",
+    image: "./images/ChatGPT Image Jul 22, 2026, 09_47_43 PM.png",
+    description: "32 cm Premium Buddha statue featuring exquisite handmade details."
   }
 ];
