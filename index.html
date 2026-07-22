@@ -80,7 +80,18 @@
 
             </div>
 
-            <nav>
+            <button
+                class="nav-toggle"
+                id="navToggle"
+                aria-label="Toggle navigation menu"
+                aria-expanded="false"
+                aria-controls="mainNav">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+            <nav id="mainNav">
 
                 <a href="#products">Collection</a>
                 <a href="#visit">Visit</a>
@@ -190,10 +201,26 @@
 
             </button>
 
-            <img
-                id="modalImage"
-                src=""
-                alt="Product">
+            <div class="modal-image-wrap" id="modalImageWrap">
+
+                <img
+                    id="modalImage"
+                    src=""
+                    alt="Product">
+
+                <button
+                    class="magnify-btn"
+                    id="magnifyBtn"
+                    aria-label="View larger image"
+                    type="button">
+
+                    <i class="fa-solid fa-magnifying-glass-plus"></i>
+
+                </button>
+
+                <div class="lens" id="lens"></div>
+
+            </div>
 
             <h2 id="modalName"></h2>
 
@@ -211,6 +238,30 @@
                 Enquire on WhatsApp
 
             </a>
+
+        </div>
+
+    </div>
+
+    <!-- FULLSCREEN IMAGE LIGHTBOX (magnifier) -->
+    <div id="imageLightbox" class="lightbox">
+
+        <button
+            class="lightbox-close"
+            id="lightboxClose"
+            aria-label="Close zoomed image">
+
+            &times;
+
+        </button>
+
+        <div class="lightbox-hint">
+            Tap / click to zoom &middot; drag to pan
+        </div>
+
+        <div class="lightbox-stage" id="lightboxStage">
+
+            <img id="lightboxImage" src="" alt="Zoomed product">
 
         </div>
 
@@ -263,7 +314,7 @@
                 <iframe
                     loading="lazy"
                     allowfullscreen
-                    src="https://www.google.com/maps?q=Ashok%20Party%20Palace&output=embed">
+                    src="https://www.google.com/maps?q=Nagbahal%2C+Lalitpur%2C+Nepal&output=embed">
                 </iframe>
 
             </div>

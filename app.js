@@ -1,190 +1,256 @@
-const grid = document.getElementById("productGrid");
-const search = document.getElementById("search");
+/* ================= MOBILE NAV TOGGLE ================= */
 
-/* Modal Elements */
+const navToggle = document.getElementById("navToggle");
+const mainNav = document.getElementById("mainNav");
 
-const modal = document.getElementById("productModal");
-const modalImage = document.getElementById("modalImage");
-const modalName = document.getElementById("modalName");
-const modalPrice = document.getElementById("modalPrice");
-const modalDescription =
-    document.getElementById("modalDescription");
+if (navToggle && mainNav) {
 
-const modalWhatsapp =
-    document.getElementById("modalWhatsapp");
+    navToggle.addEventListener("click", () => {
 
-/* ================= RENDER PRODUCTS ================= */
+        const isOpen = mainNav.classList.toggle("active");
 
-function renderProducts(data){
+        navToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
 
-    grid.innerHTML = "";
+        navToggle.innerHTML = isOpen
+            ? '<i class="fa-solid fa-xmark"></i>'
+            : '<i class="fa-solid fa-bars"></i>';
+    });
 
-    data.forEach((p)=>{
+    /* Close menu after tapping a link */
+    mainNav.querySelectorAll("a").forEach((link) => {
 
-        grid.innerHTML += `
+        link.addEventListener("click", () => {
 
-        <div class="product">
-
-            <img
-                src="${p.image}"
-                alt="${p.name}"
-                onclick="openProduct(${p.id})"
-                class="product-image"
-                onerror="this.src='https://placehold.co/600x600?text=No+Image'">
-
-            <div class="product-body">
-
-                <h3
-                    class="product-link"
-                    onclick="openProduct(${p.id})">
-
-                    ${p.name}
-
-                </h3>
-
-                <div class="price">
-                    Rs. ${p.price.toLocaleString()}
-                </div>
-
-                <p class="short-description">
-
-                    ${
-                        p.description
-                        ?
-                        p.description.substring(0,90) + "..."
-                        :
-                        "Authentic handmade Nepalese handicraft."
-                    }
-
-                </p>
-
-                <button
-                    class="details-btn"
-                    onclick="openProduct(${p.id})">
-
-                    <i class="fa-solid fa-eye"></i>
-                    View Details
-
-                </button>
-
-                <a
-                    class="whatsapp-link"
-                    target="_blank"
-                    href="https://wa.me/9779840151586?text=${encodeURIComponent(
-                        `Hello, I am interested in ${p.name}`
-                    )}">
-
-                    <i class="fab fa-whatsapp"></i>
-                    WhatsApp
-
-                </a>
-
-            </div>
-
-        </div>
-
-        `;
+            mainNav.classList.remove("active");
+            navToggle.setAttribute("aria-expanded", "false");
+            navToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+        });
     });
 }
 
-/* Initial Render */
+/* ================= IMAGE MAGNIFIER ================= */
 
-renderProducts(products);
+const modalImageWrap = document.getElementById("modalImageWrap");
+const modalImage = document.getElementById("modalImage");
+const magnifyBtn = document.getElementById("magnifyBtn");
+const lens = document.getElementById("lens");
 
-/* ================= SEARCH ================= */
+const lightbox = document.getElementById("imageLightbox");
+const lightboxImage = document.getElementById("lightboxImage");
+const lightboxClose = document.getElementById("lightboxClose");
+const lightboxStage = document.getElementById("lightboxStage");
 
-search.addEventListener("input", ()=>{
+const ZOOM_FACTOR = 2.2;
 
-    const q = search.value.toLowerCase();
+/* ---- Desktop hover lens on the modal image ---- */
 
-    const filtered = products.filter(p =>
+if (modalImageWrap && modalImage && lens) {
 
-        p.name.toLowerCase().includes(q) ||
+    modalImageWrap.addEventListener("mouseenter", () => {
 
-        p.category.toLowerCase().includes(q)
+        if (!modalImage.src) return;
 
-    );
+        lens.classList.add("show");
 
-    renderProducts(filtered);
+        lens.style.backgroundImage = `url("${modalImage.src}")`;
+    });
 
-});
+    modalImageWrap.addEventListener("mousemove", (e) => {
 
-/* ================= OPEN POPUP ================= */
+        const rect = modalImageWrap.getBoundingClientRect();
 
-function openProduct(id){
+        let x = e.clientX - rect.left;
+        let y = e.clientY - rect.top;
 
-    const product =
-        products.find(p => p.id === id);
+        const lensSize = lens.offsetWidth;
 
-    if(!product) return;
+        /* Keep the lens centered on the cursor but inside the image bounds */
+        x = Math.max(lensSize / 2, Math.min(x, rect.width - lensSize / 2));
+        y = Math.max(lensSize / 2, Math.min(y, rect.height - lensSize / 2));
 
-    modalImage.src =
-        product.image;
+        lens.style.left = `${x - lensSize / 2}px`;
+        lens.style.top = `${y - lensSize / 2}px`;
 
-    modalImage.alt =
-        product.name;
+        const bgWidth = rect.width * ZOOM_FACTOR;
+        const bgHeight = rect.height * ZOOM_FACTOR;
 
-    modalName.innerText =
-        product.name;
+        const bgX = -(x * ZOOM_FACTOR - lensSize / 2);
+        const bgY = -(y * ZOOM_FACTOR - lensSize / 2);
 
-    modalPrice.innerText =
-        "Rs. " +
-        product.price.toLocaleString();
+        lens.style.backgroundSize = `${bgWidth}px ${bgHeight}px`;
+        lens.style.backgroundPosition = `${bgX}px ${bgY}px`;
+    });
 
-    modalDescription.innerText =
-        product.description ||
-        "Authentic handmade Nepalese handicraft.";
+    modalImageWrap.addEventListener("mouseleave", () => {
 
-    if(modalWhatsapp){
+        lens.classList.remove("show");
+    });
 
-        modalWhatsapp.href =
-            `https://wa.me/9779840151586?text=${encodeURIComponent(
-                `Hello, I am interested in ${product.name}`
-            )}`;
-    }
+    modalImageWrap.addEventListener("click", () => {
 
-    modal.classList.add("active");
+        openLightbox();
+    });
+}
 
+if (magnifyBtn) {
+
+    magnifyBtn.addEventListener("click", (e) => {
+
+        e.stopPropagation();
+        openLightbox();
+    });
+}
+
+/* ---- Fullscreen zoom / pan lightbox ---- */
+
+let isZoomed = false;
+let isDragging = false;
+let startX = 0, startY = 0, currentX = 0, currentY = 0;
+
+function openLightbox() {
+
+    if (!modalImage.src) return;
+
+    lightboxImage.src = modalImage.src;
+    lightboxImage.alt = modalImage.alt;
+
+    resetZoom();
+
+    lightbox.classList.add("active");
     document.body.style.overflow = "hidden";
 }
 
-/* ================= CLOSE MODAL ================= */
+function closeLightbox() {
 
-function closeModal(){
+    lightbox.classList.remove("active");
 
-    modal.classList.remove("active");
+    /* Only restore scroll if the product modal isn't also open */
+    const productModal = document.getElementById("productModal");
 
-    document.body.style.overflow = "";
-}
-
-const closeBtn =
-    document.querySelector(".close");
-
-if(closeBtn){
-
-    closeBtn.addEventListener("click", closeModal);
-}
-
-/* Click outside */
-
-window.addEventListener("click",(e)=>{
-
-    if(e.target === modal){
-
-        closeModal();
-
+    if (!productModal || !productModal.classList.contains("active")) {
+        document.body.style.overflow = "";
     }
 
-});
+    resetZoom();
+}
 
-/* ESC key close */
+function resetZoom() {
 
-document.addEventListener("keydown",(e)=>{
+    isZoomed = false;
+    currentX = 0;
+    currentY = 0;
 
-    if(e.key === "Escape"){
+    lightboxImage.style.transform = "translate(0px, 0px) scale(1)";
+    lightboxImage.classList.remove("zoomed", "dragging");
+}
 
-        closeModal();
+function applyTransform() {
 
+    const scale = isZoomed ? ZOOM_FACTOR : 1;
+
+    lightboxImage.style.transform =
+        `translate(${currentX}px, ${currentY}px) scale(${scale})`;
+}
+
+if (lightboxImage) {
+
+    /* Click / tap toggles zoom in on the point clicked */
+    lightboxImage.addEventListener("click", (e) => {
+
+        if (isDragging) return;
+
+        if (!isZoomed) {
+
+            isZoomed = true;
+            lightboxImage.classList.add("zoomed");
+            applyTransform();
+
+        } else {
+
+            resetZoom();
+        }
+    });
+
+    /* Desktop drag-to-pan while zoomed */
+    lightboxImage.addEventListener("mousedown", (e) => {
+
+        if (!isZoomed) return;
+
+        isDragging = true;
+        lightboxImage.classList.add("dragging");
+
+        startX = e.clientX - currentX;
+        startY = e.clientY - currentY;
+    });
+
+    window.addEventListener("mousemove", (e) => {
+
+        if (!isDragging) return;
+
+        currentX = e.clientX - startX;
+        currentY = e.clientY - startY;
+
+        applyTransform();
+    });
+
+    window.addEventListener("mouseup", () => {
+
+        if (isDragging) {
+
+            isDragging = false;
+            lightboxImage.classList.remove("dragging");
+        }
+    });
+
+    /* Touch drag-to-pan while zoomed */
+    lightboxImage.addEventListener("touchstart", (e) => {
+
+        if (!isZoomed || e.touches.length !== 1) return;
+
+        isDragging = true;
+
+        startX = e.touches[0].clientX - currentX;
+        startY = e.touches[0].clientY - currentY;
+
+    }, { passive: true });
+
+    lightboxImage.addEventListener("touchmove", (e) => {
+
+        if (!isDragging || e.touches.length !== 1) return;
+
+        currentX = e.touches[0].clientX - startX;
+        currentY = e.touches[0].clientY - startY;
+
+        applyTransform();
+
+    }, { passive: true });
+
+    lightboxImage.addEventListener("touchend", () => {
+
+        isDragging = false;
+    });
+}
+
+if (lightboxClose) {
+
+    lightboxClose.addEventListener("click", closeLightbox);
+}
+
+if (lightbox) {
+
+    lightbox.addEventListener("click", (e) => {
+
+        if (e.target === lightbox || e.target === lightboxStage) {
+
+            closeLightbox();
+        }
+    });
+}
+
+document.addEventListener("keydown", (e) => {
+
+    if (e.key === "Escape" && lightbox && lightbox.classList.contains("active")) {
+
+        closeLightbox();
     }
-
 });
